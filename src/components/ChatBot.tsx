@@ -4,6 +4,7 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/components/ui/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 import { z } from "zod";
 import { 
   MessageCircle, 
@@ -66,7 +67,7 @@ const ChatBot = () => {
     { text: "College hostel info?", icon: "🏠" }
   ];
 
-  const sendMessage = (content: string) => {
+  const sendMessage = async (content: string) => {
     // Validate input
     const result = messageSchema.safeParse({ content });
     if (!result.success) {
@@ -90,29 +91,46 @@ const ChatBot = () => {
     setMessages(prev => [...prev, userMessage]);
     setInputMessage("");
 
-    // Simulate AI response
-    setTimeout(() => {
-      let aiResponse = "";
-      if (validatedContent.toLowerCase().includes("engineering")) {
-        aiResponse = "Based on your location and interests, here are top government engineering colleges:\n\n🏗️ **IIT Delhi** - Fee: ₹2L/year\n🏗️ **NIT Trichy** - Fee: ₹1.5L/year\n🏗️ **IIIT Hyderabad** - Fee: ₹3L/year\n\nWould you like detailed admission criteria or scholarship information?";
-      } else if (validatedContent.toLowerCase().includes("medical")) {
-        aiResponse = "Government medical colleges with affordable fees:\n\n⚕️ **AIIMS Delhi** - Fee: ₹25K/year\n⚕️ **JIPMER Puducherry** - Fee: ₹30K/year\n⚕️ **KGMC Lucknow** - Fee: ₹35K/year\n\nNEET cutoff for these colleges is typically 650+ marks. Need help with NEET preparation strategy?";
-      } else if (validatedContent.toLowerCase().includes("scholarship")) {
-        aiResponse = "Available scholarships for government college students:\n\n💰 **Merit Scholarships**: ₹50K-₹2L based on marks\n💰 **Need-based Aid**: ₹25K-₹1L for family income <₹5L\n💰 **Minority Scholarships**: Special schemes available\n\n📅 **Important Deadlines:**\n- Central schemes: March 31st\n- State schemes: Varies by state\n\nShall I help you apply for specific scholarships?";
-      } else {
-        aiResponse = "I understand you need guidance! I can help with:\n\n📚 Career path selection\n🎯 College recommendations\n💰 Scholarship information\n📝 Admission procedures\n🗣️ Interview preparation\n\nWhat specific topic would you like to explore?";
+    // Call AI backend
+    try {
+      const { data, error } = await supabase.functions.invoke('chat-ai', {
+        body: {
+          message: validatedContent,
+          language: selectedLanguage,
+          conversationHistory: messages.slice(-5).map(m => ({
+            role: m.isUser ? 'user' : 'assistant',
+            content: m.content
+          }))
+        }
+      });
+
+      if (error) {
+        console.error('Error calling chat-ai:', error);
+        toast({
+          title: "Error",
+          description: "Failed to get AI response. Please try again.",
+          variant: "destructive"
+        });
+        return;
       }
 
       const botMessage: Message = {
         id: (Date.now() + 1).toString(),
-        content: aiResponse,
+        content: data.response,
         isUser: false,
         timestamp: new Date(),
         type: 'text'
       };
 
       setMessages(prev => [...prev, botMessage]);
-    }, 1500);
+    } catch (error) {
+      console.error('Unexpected error:', error);
+      toast({
+        title: "Error",
+        description: "An unexpected error occurred. Please try again.",
+        variant: "destructive"
+      });
+    }
   };
 
   const handleVoiceInput = () => {
