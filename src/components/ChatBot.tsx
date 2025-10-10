@@ -3,6 +3,8 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
+import { useToast } from "@/components/ui/use-toast";
+import { z } from "zod";
 import { 
   MessageCircle, 
   Send, 
@@ -24,7 +26,15 @@ interface Message {
   type?: 'text' | 'suggestion' | 'resource';
 }
 
+const messageSchema = z.object({
+  content: z.string()
+    .trim()
+    .min(1, 'Message cannot be empty')
+    .max(1000, 'Message too long (max 1000 characters)')
+});
+
 const ChatBot = () => {
+  const { toast } = useToast();
   const [messages, setMessages] = useState<Message[]>([
     {
       id: '1',
@@ -57,9 +67,22 @@ const ChatBot = () => {
   ];
 
   const sendMessage = (content: string) => {
+    // Validate input
+    const result = messageSchema.safeParse({ content });
+    if (!result.success) {
+      toast({
+        title: "Invalid message",
+        description: result.error.errors[0].message,
+        variant: "destructive"
+      });
+      return;
+    }
+
+    const validatedContent = result.data.content;
+    
     const userMessage: Message = {
       id: Date.now().toString(),
-      content,
+      content: validatedContent,
       isUser: true,
       timestamp: new Date()
     };
@@ -70,11 +93,11 @@ const ChatBot = () => {
     // Simulate AI response
     setTimeout(() => {
       let aiResponse = "";
-      if (content.toLowerCase().includes("engineering")) {
+      if (validatedContent.toLowerCase().includes("engineering")) {
         aiResponse = "Based on your location and interests, here are top government engineering colleges:\n\n🏗️ **IIT Delhi** - Fee: ₹2L/year\n🏗️ **NIT Trichy** - Fee: ₹1.5L/year\n🏗️ **IIIT Hyderabad** - Fee: ₹3L/year\n\nWould you like detailed admission criteria or scholarship information?";
-      } else if (content.toLowerCase().includes("medical")) {
+      } else if (validatedContent.toLowerCase().includes("medical")) {
         aiResponse = "Government medical colleges with affordable fees:\n\n⚕️ **AIIMS Delhi** - Fee: ₹25K/year\n⚕️ **JIPMER Puducherry** - Fee: ₹30K/year\n⚕️ **KGMC Lucknow** - Fee: ₹35K/year\n\nNEET cutoff for these colleges is typically 650+ marks. Need help with NEET preparation strategy?";
-      } else if (content.toLowerCase().includes("scholarship")) {
+      } else if (validatedContent.toLowerCase().includes("scholarship")) {
         aiResponse = "Available scholarships for government college students:\n\n💰 **Merit Scholarships**: ₹50K-₹2L based on marks\n💰 **Need-based Aid**: ₹25K-₹1L for family income <₹5L\n💰 **Minority Scholarships**: Special schemes available\n\n📅 **Important Deadlines:**\n- Central schemes: March 31st\n- State schemes: Varies by state\n\nShall I help you apply for specific scholarships?";
       } else {
         aiResponse = "I understand you need guidance! I can help with:\n\n📚 Career path selection\n🎯 College recommendations\n💰 Scholarship information\n📝 Admission procedures\n🗣️ Interview preparation\n\nWhat specific topic would you like to explore?";
