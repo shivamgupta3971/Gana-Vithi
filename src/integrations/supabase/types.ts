@@ -14,7 +14,278 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      career_paths: {
+        Row: {
+          average_salary: number | null
+          created_at: string | null
+          description: string
+          id: string
+          job_outlook: string | null
+          related_courses: string[] | null
+          required_education: string
+          skills_required: string[] | null
+          title: string
+        }
+        Insert: {
+          average_salary?: number | null
+          created_at?: string | null
+          description: string
+          id?: string
+          job_outlook?: string | null
+          related_courses?: string[] | null
+          required_education: string
+          skills_required?: string[] | null
+          title: string
+        }
+        Update: {
+          average_salary?: number | null
+          created_at?: string | null
+          description?: string
+          id?: string
+          job_outlook?: string | null
+          related_courses?: string[] | null
+          required_education?: string
+          skills_required?: string[] | null
+          title?: string
+        }
+        Relationships: []
+      }
+      chat_conversations: {
+        Row: {
+          created_at: string | null
+          id: string
+          language: string | null
+          title: string | null
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          language?: string | null
+          title?: string | null
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          language?: string | null
+          title?: string | null
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
+      chat_messages: {
+        Row: {
+          content: string
+          conversation_id: string
+          created_at: string | null
+          id: string
+          is_user: boolean
+        }
+        Insert: {
+          content: string
+          conversation_id: string
+          created_at?: string | null
+          id?: string
+          is_user: boolean
+        }
+        Update: {
+          content?: string
+          conversation_id?: string
+          created_at?: string | null
+          id?: string
+          is_user?: boolean
+        }
+        Relationships: [
+          {
+            foreignKeyName: "chat_messages_conversation_id_fkey"
+            columns: ["conversation_id"]
+            isOneToOne: false
+            referencedRelation: "chat_conversations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      colleges: {
+        Row: {
+          admission_criteria: string | null
+          contact_info: Json | null
+          created_at: string | null
+          fees_per_year: number | null
+          id: string
+          location: string
+          name: string
+          ranking: number | null
+          state: string
+          type: string
+        }
+        Insert: {
+          admission_criteria?: string | null
+          contact_info?: Json | null
+          created_at?: string | null
+          fees_per_year?: number | null
+          id?: string
+          location: string
+          name: string
+          ranking?: number | null
+          state: string
+          type: string
+        }
+        Update: {
+          admission_criteria?: string | null
+          contact_info?: Json | null
+          created_at?: string | null
+          fees_per_year?: number | null
+          id?: string
+          location?: string
+          name?: string
+          ranking?: number | null
+          state?: string
+          type?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          created_at: string | null
+          education_level: string | null
+          full_name: string | null
+          id: string
+          interests: string[] | null
+          location: string | null
+          phone: string | null
+          preferred_language: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          education_level?: string | null
+          full_name?: string | null
+          id: string
+          interests?: string[] | null
+          location?: string | null
+          phone?: string | null
+          preferred_language?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          education_level?: string | null
+          full_name?: string | null
+          id?: string
+          interests?: string[] | null
+          location?: string | null
+          phone?: string | null
+          preferred_language?: string | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      scholarships: {
+        Row: {
+          amount: number
+          application_link: string | null
+          category: string
+          created_at: string | null
+          deadline: string
+          description: string
+          eligibility_criteria: string
+          id: string
+          is_active: boolean | null
+          title: string
+        }
+        Insert: {
+          amount: number
+          application_link?: string | null
+          category: string
+          created_at?: string | null
+          deadline: string
+          description: string
+          eligibility_criteria: string
+          id?: string
+          is_active?: boolean | null
+          title: string
+        }
+        Update: {
+          amount?: number
+          application_link?: string | null
+          category?: string
+          created_at?: string | null
+          deadline?: string
+          description?: string
+          eligibility_criteria?: string
+          id?: string
+          is_active?: boolean | null
+          title?: string
+        }
+        Relationships: []
+      }
+      user_progress: {
+        Row: {
+          completed_at: string | null
+          created_at: string | null
+          id: string
+          metadata: Json | null
+          points: number | null
+          quest_type: string
+          status: string | null
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          completed_at?: string | null
+          created_at?: string | null
+          id?: string
+          metadata?: Json | null
+          points?: number | null
+          quest_type: string
+          status?: string | null
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          completed_at?: string | null
+          created_at?: string | null
+          id?: string
+          metadata?: Json | null
+          points?: number | null
+          quest_type?: string
+          status?: string | null
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
+      user_saved_items: {
+        Row: {
+          created_at: string | null
+          id: string
+          item_id: string
+          item_type: string
+          notes: string | null
+          user_id: string
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          item_id: string
+          item_type: string
+          notes?: string | null
+          user_id: string
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          item_id?: string
+          item_type?: string
+          notes?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
