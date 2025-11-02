@@ -26,13 +26,13 @@ const Hero = () => {
             🇮🇳 Empowering Rural Students
           </Badge>
           <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
-            Your Path to
-            <span className="text-transparent bg-gradient-to-r from-yellow-300 to-orange-300 bg-clip-text">
-              {" "}Government Colleges
+            GYANA VITHI
+            <span className="block text-3xl md:text-4xl mt-4 text-white/90">
+              Your Path to Government Colleges
             </span>
           </h1>
           <p className="text-xl md:text-2xl text-white/90 mb-8 max-w-3xl mx-auto leading-relaxed">
-            AI-powered career guidance connecting rural students to government education opportunities with multilingual support
+            AI-powered career guidance in your language. Connecting students to government education opportunities.
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">

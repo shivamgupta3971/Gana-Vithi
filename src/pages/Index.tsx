@@ -41,7 +41,7 @@ const Index = () => {
       {/* Navigation Bar */}
       <nav className="bg-card/50 backdrop-blur-sm border-b border-border/50 sticky top-0 z-50">
         <div className="container mx-auto px-4 py-3 flex items-center justify-between">
-          <h1 className="text-xl font-bold gradient-text">Education Counselor</h1>
+          <h1 className="text-xl font-bold gradient-text">GYANA VITHI</h1>
           <div className="flex items-center gap-4">
             <div className="flex items-center gap-2 text-sm text-muted-foreground">
               <User className="h-4 w-4" />

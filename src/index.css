@@ -6,130 +6,119 @@
 
 @layer base {
   :root {
-    /* Core brand colors */
-    --background: 216 20% 98%;
-    --foreground: 215 25% 15%;
-
-    /* Card and surface colors */
+    /* Minimal color palette */
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
     --card: 0 0% 100%;
-    --card-foreground: 215 25% 15%;
-
+    --card-foreground: 240 10% 3.9%;
     --popover: 0 0% 100%;
-    --popover-foreground: 215 25% 15%;
-
-    /* Primary - Educational Blue */
-    --primary: 213 94% 68%;
+    --popover-foreground: 240 10% 3.9%;
+    
+    /* Primary: Deep indigo - main brand color */
+    --primary: 235 60% 48%;
     --primary-foreground: 0 0% 100%;
-    --primary-glow: 213 94% 78%;
-
-    /* Secondary - Success Green */
-    --secondary: 145 63% 42%;
+    --primary-glow: 235 60% 60%;
+    
+    /* Secondary: Soft gray-blue accent */
+    --secondary: 215 20% 65%;
     --secondary-foreground: 0 0% 100%;
-
-    /* Muted backgrounds */
-    --muted: 213 20% 94%;
-    --muted-foreground: 215 16% 47%;
-
-    /* Accent - Warm Orange */
-    --accent: 25 95% 53%;
+    
+    /* Muted: Neutral backgrounds */
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+    
+    /* Accent: Subtle blue */
+    --accent: 210 40% 50%;
     --accent-foreground: 0 0% 100%;
-
-    /* Warning - Academic Gold */
-    --warning: 45 93% 58%;
-    --warning-foreground: 45 15% 15%;
-
-    --destructive: 0 84% 60%;
+    
+    /* Destructive: Simple red */
+    --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 100%;
-
-    /* Borders and inputs */
-    --border: 213 20% 87%;
-    --input: 213 20% 87%;
-    --ring: 213 94% 68%;
-
-    /* Gamification colors */
-    --quest-bronze: 30 67% 58%;
-    --quest-silver: 0 0% 73%;
-    --quest-gold: 45 93% 58%;
-
-    /* Special gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(213 94% 68%), hsl(213 94% 78%));
-    --gradient-secondary: linear-gradient(135deg, hsl(145 63% 42%), hsl(145 63% 52%));
-    --gradient-hero: linear-gradient(135deg, hsl(213 94% 68%) 0%, hsl(195 85% 55%) 50%, hsl(145 63% 42%) 100%);
-    --gradient-card: linear-gradient(135deg, hsl(0 0% 100%) 0%, hsl(213 20% 98%) 100%);
-
-    /* Shadows */
-    --shadow-soft: 0 2px 8px -2px hsl(213 20% 15% / 0.08);
-    --shadow-medium: 0 4px 16px -4px hsl(213 20% 15% / 0.12);
-    --shadow-strong: 0 8px 32px -8px hsl(213 20% 15% / 0.16);
-    --shadow-glow: 0 0 24px hsl(213 94% 68% / 0.3);
-
-    --radius: 0.75rem;
-
+    
+    /* Warning: Minimal amber */
+    --warning: 38 80% 50%;
+    --warning-foreground: 0 0% 100%;
+    
+    /* UI Elements */
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 235 60% 48%;
+    --radius: 0.5rem;
+    
+    /* Sidebar */
     --sidebar-background: 0 0% 98%;
-
     --sidebar-foreground: 240 5.3% 26.1%;
-
     --sidebar-primary: 240 5.9% 10%;
-
     --sidebar-primary-foreground: 0 0% 98%;
-
     --sidebar-accent: 240 4.8% 95.9%;
-
     --sidebar-accent-foreground: 240 5.9% 10%;
-
     --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-ring: 235 60% 48%;
+    
+    /* Minimal Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(235 60% 48%), hsl(235 60% 40%));
+    --gradient-secondary: linear-gradient(135deg, hsl(215 20% 65%), hsl(215 20% 55%));
+    --gradient-hero: linear-gradient(180deg, hsl(235 60% 48%), hsl(235 50% 35%));
+    --gradient-card: linear-gradient(135deg, hsl(0 0% 100%), hsl(240 4.8% 98%));
+    
+    /* Subtle Shadows */
+    --shadow-soft: 0 1px 3px rgba(0, 0, 0, 0.05);
+    --shadow-medium: 0 2px 8px rgba(0, 0, 0, 0.08);
+    --shadow-strong: 0 4px 12px rgba(0, 0, 0, 0.1);
   }
 
   .dark {
-    /* Core brand colors - dark mode */
-    --background: 215 25% 8%;
-    --foreground: 213 20% 95%;
-
-    /* Card and surface colors */
-    --card: 215 25% 12%;
-    --card-foreground: 213 20% 95%;
-
-    --popover: 215 25% 12%;
-    --popover-foreground: 213 20% 95%;
-
-    /* Primary - Educational Blue (adjusted for dark) */
-    --primary: 213 94% 68%;
-    --primary-foreground: 215 25% 8%;
-    --primary-glow: 213 94% 78%;
-
-    /* Secondary - Success Green */
-    --secondary: 145 63% 45%;
-    --secondary-foreground: 215 25% 8%;
-
-    /* Muted backgrounds */
-    --muted: 215 25% 16%;
-    --muted-foreground: 213 20% 65%;
-
-    /* Accent - Warm Orange */
-    --accent: 25 95% 58%;
-    --accent-foreground: 215 25% 8%;
-
-    /* Warning - Academic Gold */
-    --warning: 45 93% 62%;
-    --warning-foreground: 215 25% 8%;
-
-    --destructive: 0 84% 65%;
-    --destructive-foreground: 215 25% 8%;
-
-    /* Borders and inputs */
-    --border: 215 25% 20%;
-    --input: 215 25% 20%;
-    --ring: 213 94% 68%;
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 240 10% 7%;
+    --card-foreground: 0 0% 98%;
+    --popover: 240 10% 7%;
+    --popover-foreground: 0 0% 98%;
+    
+    /* Dark Primary */
+    --primary: 235 60% 58%;
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 235 60% 68%;
+    
+    /* Dark Secondary */
+    --secondary: 215 20% 55%;
+    --secondary-foreground: 0 0% 100%;
+    
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+    
+    --accent: 210 40% 55%;
+    --accent-foreground: 0 0% 100%;
+    
+    --destructive: 0 72% 56%;
+    --destructive-foreground: 0 0% 100%;
+    
+    --warning: 38 80% 55%;
+    --warning-foreground: 0 0% 100%;
+    
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 235 60% 58%;
+    
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary: 235 60% 48%;
     --sidebar-primary-foreground: 0 0% 100%;
     --sidebar-accent: 240 3.7% 15.9%;
     --sidebar-accent-foreground: 240 4.8% 95.9%;
     --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-ring: 235 60% 58%;
+    
+    /* Dark gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(235 60% 58%), hsl(235 60% 48%));
+    --gradient-secondary: linear-gradient(135deg, hsl(215 20% 55%), hsl(215 20% 45%));
+    --gradient-hero: linear-gradient(180deg, hsl(240 10% 3.9%), hsl(235 20% 8%));
+    --gradient-card: linear-gradient(135deg, hsl(240 10% 7%), hsl(240 8% 10%));
+    
+    /* Dark shadows */
+    --shadow-soft: 0 1px 3px rgba(0, 0, 0, 0.2);
+    --shadow-medium: 0 2px 8px rgba(0, 0, 0, 0.3);
+    --shadow-strong: 0 4px 12px rgba(0, 0, 0, 0.4);
   }
 }
 
